@@ -7,9 +7,12 @@ public class Player : MonoBehaviour
     Vector2 movement;
     public Rigidbody2D rb;
     public float moveSpeed = 10f;
+    SceneController sceneController;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sceneController = FindObjectOfType<SceneController>();
     }
     void Update()
     {
@@ -26,14 +29,8 @@ public class Player : MonoBehaviour
     {
         if (collision.collider.tag == "Enemy")
         {
-            /*
-            if (Input.GetKeyDown("Space"))
-            {*/
-                //Debug.Log("AAA");
-                movement = Vector2.zero;
-            //}
-            //movement.enabled = false;
-            //FindObjectOfType<GameManager>().EndGame();
+            moveSpeed = 0;
+            sceneController.EndGame();
         }
     }
     private void OnTriggerEnter2D()
